@@ -12,4 +12,4 @@ def connectCollection(database, collection):
     coll = db[collection]
     return db, coll
 
-db,coll = connectCollection('ets_factory','financial_securities')
+db,collection_fs = connectCollection('ets_factory','financial_securities')
