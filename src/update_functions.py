@@ -26,7 +26,7 @@ def calculate_Rt(activos,peticiones):
         print(peticiones[ind])
         for i in range(len(activos)):
             #activosid = activos[i]["id"]
-            #peticionesid = peticiones[ind]["idAS"]
+            #peticionesid = peticiones[ind]["id"]
             #print('aid', activosid)
             #print('pid',peticionesid)
             if activos[i]["id"]==peticiones[ind]["idAS"]:

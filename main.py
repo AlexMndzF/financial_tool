@@ -4,19 +4,34 @@ from src.update_functions import update_financial_securitie
 import time
 import json
 import requests
+import os
 
 app = Flask(__name__)
 
+def uploadjson():
+    upload    = request.files.get('upload')
+    print('==============>UPLOAD',upload.filename)
+    if upload == None or upload.filename == '':
+        return 'Error no json'
+    name, ext = os.path.splitext(upload.filename)
+    if ext not in ('.json'):
+        return 'Error'
+    upload.save('/tmp/upload.json') # appends upload.filename automatically
+    with open('/tmp/upload.json') as f:
+        d = json.load(f)
+        print(d)
+    return d
+
 @app.route("/")
-def check_server():
-    return render_template("home.html")
+def check_server(value="",value2 =""):
+    return render_template("home.html", value=value)
 
 @app.route("/update", methods=['POST'])
 def update_fs():
     peticiones = request.get_json()
     if peticiones == None:
-        peticiones = json.loads(request.form['Json_file'])
-    # print(peticiones['0'])
+        peticiones = uploadjson()
+    print(peticiones['0'])
     financial_securitie = list(collection_fs.find({'id':peticiones['0']["id_fs"]}))[-1]
     # print("===============Inancial_securitie=====================")
     print(financial_securitie)
@@ -24,14 +39,16 @@ def update_fs():
     # print("===============Financial_securitie_final=====================")
     # print(financial_securitie_final)
     collection_fs.insert(financial_securitie_final)
-    return (f"{200}")
+    return  check_server(value="actualizado")
 @app.route("/insert", methods = ['POST'])
 def insert_finantial_securitie():
     financial_securitie = request.get_json()
+    if financial_securitie == None:
+        peticiones = uploadjson()
     print(financial_securitie)
     financial_securitie["timestamp"]=time.time()
     print(financial_securitie)
     collection_fs.insert(financial_securitie)
-    return (f"{200}")
+    return check_server(value2="añadido")
 if __name__ == '__main__':
     app.run(debug=True)

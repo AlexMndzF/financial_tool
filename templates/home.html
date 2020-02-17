@@ -6,10 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Insert Document</h1>
-    <form action = "/update"  method="post">
-        <input type="text" name="Json_file">
-        <input type="submit" value="Submit">
-    </form>
+    <h1>Update financial securitie:</h1>
+    <form action="/update" enctype="multipart/form-data" method="post">
+        <input name="upload" type="file" multiple>
+        <input type="submit">
+        </form>
+    <p>{{ value }}</p>
+    <h1>Add new financial securitie:</h1>
+    <form action="/insert" enctype="multipart/form-data" method="post">
+        <input name="upload" type="file" multiple>
+        <input type="submit">
+        </form>
+    <p>{{ value2 }}</p>
 </body>
 </html>
