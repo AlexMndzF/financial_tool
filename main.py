@@ -2,6 +2,8 @@ from flask import Flask,render_template, url_for, request, session, redirect
 from src.mongo_functions import collection_fs
 from src.update_functions import update_financial_securitie
 import time
+import json
+import requests
 
 app = Flask(__name__)
 
@@ -12,6 +14,8 @@ def check_server():
 @app.route("/update", methods=['POST'])
 def update_fs():
     peticiones = request.get_json()
+    if peticiones == None:
+        peticiones = json.loads(request.form['Json_file'])
     # print(peticiones['0'])
     financial_securitie = list(collection_fs.find({'id':peticiones['0']["id_fs"]}))[-1]
     # print("===============Inancial_securitie=====================")
@@ -29,6 +33,5 @@ def insert_finantial_securitie():
     print(financial_securitie)
     collection_fs.insert(financial_securitie)
     return (f"{200}")
-
 if __name__ == '__main__':
     app.run(debug=True)
