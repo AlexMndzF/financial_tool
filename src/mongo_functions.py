@@ -7,6 +7,8 @@ load_dotenv()
 connection = os.getenv('URLMONGO')
 #Connect to DB
 client = MongoClient(connection)
+
+
 def connectCollection(database, collection):
     db = client[database]
     coll = db[collection]
