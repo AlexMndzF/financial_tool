@@ -27,7 +27,7 @@ def update_fs():
     financial_securitie = list(collection_fs.find({'id':peticiones['0']["id_fs"]}))[-1]
     financial_securitie_final = update_financial_securitie(financial_securitie,peticiones)
     collection_fs.insert(financial_securitie_final)
-    return  redirect('/')
+    return  render_template("home.html", status= "Updated")
 
 
 @app.route("/insert", methods = ['POST'])
@@ -39,7 +39,7 @@ def insert_finantial_securitie():
     financial_securitie["timestamp"]=time.time()
     collection_fs.insert(financial_securitie)
     
-    return  redirect('/')
+    return  render_template("home.html", status= "Added")
 
 @app.route('/line', methods = ['POST'])
 def get_char():
