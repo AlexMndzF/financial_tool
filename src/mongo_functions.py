@@ -5,6 +5,9 @@ load_dotenv()
 
 #Get Password
 connection = os.getenv('URLMONGO')
+if connection == None:
+    connection = os.environ["URLMONGO"]
+    
 #Connect to DB
 client = MongoClient(connection)
 
