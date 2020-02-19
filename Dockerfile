@@ -1,10 +1,7 @@
-FROM python:3.7-slim
-
-# Copy the contents of the current directory inside the docker image
-ADD . /
-
-# Install the requirements 
-RUN pip3 install -r requirements.txt 
-EXPOSE 5000
-# Command to run when starting the container
-CMD ["python3","-u","main.py"]
+FROM ubuntu:latest
+RUN apt-get update -y
+RUN apt-get intall python 3.7
+RUN apt-get install -y python3-pip python-dev build-essential
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python3"]
+CMD ["main.py"]
