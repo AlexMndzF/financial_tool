@@ -6,7 +6,6 @@ from src.update_functions import update_financial_securitie
 from src.procces_data_functions import uploadjson
 import time
 import json
-import requests
 import os
 from datetime import datetime
 
