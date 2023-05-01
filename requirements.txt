@@ -1,6 +1,6 @@
 bson==0.5.8
 dnspython==1.16.0
-Flask==1.1.1
+Flask==2.3.2
 get==2019.4.13
 numpy==1.17.4
 pandas==0.25.3
